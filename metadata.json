@@ -1,8 +1,8 @@
 {
     "title": "Federated learning server",
-    "summary": "Federated learning server with flower",
+    "summary": "Federated learning server with Flower",
     "description": [
-        "Federated learning server deployed using flower.\n"
+        "Federated learning server deployed using [Flower](https://github.com/adap/flower).\n"
     ],
     "keywords": [
         "docker",
@@ -16,8 +16,8 @@
 		"code": "https://github.com/deephdc/federated-server"
 	},
     "continuous_integration": {
-        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/DEEP-OC-federated-server/master",
-        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-federated-server/job/master"
+        "build_status_badge": "https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/DEEP-OC-federated-server/main",
+        "build_status_url": "https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-federated-server/job/main"
     },
     "tosca": [
         {
