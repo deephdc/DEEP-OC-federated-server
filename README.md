@@ -5,7 +5,7 @@
 # DEEP-OC-fedserver
 [![Build Status](https://jenkins.indigo-datacloud.eu/buildStatus/icon?job=Pipeline-as-code/DEEP-OC-org/DEEP-OC-federated-server/main)](https://jenkins.indigo-datacloud.eu/job/Pipeline-as-code/job/DEEP-OC-org/job/DEEP-OC-federated-server/job/main)
 
-This is a container that will run the [fedserver](https://github.com/deephdc/fedserver) application leveraging the DEEP as a Service API component ([DEEPaaS API V2](https://github.com/indigo-dc/DEEPaaS)).
+This is a container that will run the [fedserver](https://github.com/deephdc/federated-server) application leveraging the DEEP as a Service API component ([DEEPaaS API V2](https://github.com/indigo-dc/DEEPaaS)).
 
 
 ## Running the container
