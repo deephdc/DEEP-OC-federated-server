@@ -30,11 +30,14 @@ ARG jlab=true
 # - gcc is needed in Pytorch images because deepaas installation might break otherwise (see docs) (it is already installed in tensorflow images)
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
-        gcc \
-        git \
-        curl \
-        nano \
+    gcc \
+    git \
+    curl \
+    nano \
+    tini \     
     && rm -rf /var/lib/apt/lists/*
+
+RUN wget https://github.com/tsl0922/ttyd/releases/download/1.7.4/ttyd.x86_64 && cp ./ttyd.x86_64 /usr/bin/ttyd && chmod +x /usr/bin/ttyd
 
 # Update python packages
 # [!] Remember: DEEP API V2 only works with python>=3.6
@@ -51,21 +54,22 @@ ENV LANG C.UTF-8
 WORKDIR /srv
 
 # Initialization scripts
-RUN git clone https://github.com/deephdc/deep-start /srv/.deep-start && \
+RUN git clone --depth 1 https://github.com/deephdc/deep-start /srv/.deep-start && \
     ln -s /srv/.deep-start/deep-start.sh /usr/local/bin/deep-start && \
     ln -s /srv/.deep-start/run_jupyter.sh /usr/local/bin/run_jupyter
 
 # Install JupyterLab
 ENV JUPYTER_CONFIG_DIR /srv/.deep-start/
+ENV FEDERATED_ROUNDS 2
 # Necessary for the Jupyter Lab terminal
 ENV SHELL /bin/bash
 RUN if [ "$jlab" = true ]; then \
-       # by default has to work (1.2.0 wrongly required nodejs and npm)
-       pip3 install --no-cache-dir jupyterlab ; \
+    # by default has to work (1.2.0 wrongly required nodejs and npm)
+    pip3 install --no-cache-dir jupyterlab ; \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app
-RUN git clone -b $branch https://github.com/deephdc/federated-server && \
+RUN git clone --depth 1 -b $branch https://github.com/deephdc/federated-server && \
     cd  federated-server && \
     pip3 install --no-cache-dir -e . && \
     cd ..
@@ -74,4 +78,7 @@ RUN git clone -b $branch https://github.com/deephdc/federated-server && \
 EXPOSE 5000 6006 8888
 
 # Launch deepaas
-CMD ["python3", "-m", "fedserver.server"]
+#CMD ["python3", "-m", "fedserver.server"]
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["ttyd","-p", "6006", "python3", "-m", "fedserver.server"]
