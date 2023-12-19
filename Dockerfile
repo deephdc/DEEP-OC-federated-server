@@ -69,7 +69,7 @@ RUN if [ "$jlab" = true ]; then \
     else echo "[INFO] Skip JupyterLab installation!"; fi
 
 # Install user app
-RUN git clone --depth 1 -b $branch https://github.com/deephdc/federated-server && \
+RUN git clone --depth 1 -b main https://github.com/deephdc/federated-server && \
     cd  federated-server && \
     pip3 install --no-cache-dir -e . && \
     cd ..
