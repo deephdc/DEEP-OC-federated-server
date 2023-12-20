@@ -60,7 +60,7 @@ RUN git clone --depth 1 https://github.com/deephdc/deep-start /srv/.deep-start &
 
 # Install JupyterLab
 ENV JUPYTER_CONFIG_DIR /srv/.deep-start/
-ENV FEDERATED_ROUNDS 2
+
 # Necessary for the Jupyter Lab terminal
 ENV SHELL /bin/bash
 RUN if [ "$jlab" = true ]; then \
