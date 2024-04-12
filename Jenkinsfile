@@ -23,7 +23,7 @@ pipeline {
             when {
                 anyOf {
                     branch 'main'
-                    branch 'test'
+                    branch 'tokens'
                     buildingTag()
                 }
             }
@@ -43,17 +43,17 @@ pipeline {
                         if (env.BRANCH_NAME == 'main') {
                            // CPU (aka latest, i.e. default)
                            id_cpu = DockerBuild(id,
-                                            tag: ['latest', 'cpu'],
+                                            tag: ['latest'],
                                             build_args: ["tag=${env.base_cpu_tag}",
                                                          "branch=main"])
                         }
 
-                        if (env.BRANCH_NAME == 'test') {
+                        if (env.BRANCH_NAME == 'tokens') {
                            // CPU
                            id_cpu = DockerBuild(id,
-                                            tag: ['test', 'cpu-test'],
+                                            tag: ['tokens'],
                                             build_args: ["tag=${env.base_cpu_tag}",
-                                                         "branch=test"])
+                                                         "branch=tokens"])
                         }
                     }
                 }
@@ -69,7 +69,7 @@ pipeline {
             when {
                 anyOf {
                    branch 'main'
-                   branch 'test'
+                   branch 'tokens'
                    buildingTag()
                }
             }
