@@ -2,7 +2,7 @@
     "title": "Federated learning server",
     "summary": "Federated learning server with Flower",
     "description": [
-        "Federated learning server deployed using [Flower](https://github.com/adap/flower).\n"
+        "Federated Learning server deployed using [Flower](https://flower.ai/).\n"
     ],
     "keywords": [
         "docker",
